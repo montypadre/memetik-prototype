@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
-import useDynamicHeightField from '../useDynamicHeightField';
+{/*import useDynamicHeightField from '../useDynamicHeightField';*/}
 
 const SharePost = styled.div`
     width: 100%;
@@ -16,10 +16,13 @@ const SharePost = styled.div`
 
 const SharePostWrapper = styled.div`
     padding: 10px;
+    display: flex;
+    align-items: center;
 `
 
-const SharePostTop = styled.div`
+const SharePostLeft = styled.div`
     display: flex;
+    flex: 2;
     align-items: center;
 `
 
@@ -34,10 +37,9 @@ const SharePostProfilePicture = styled.img`
 
 const SharePostInput = styled.textarea`
     border: none;
-    width: 100%;
-    font-family:consolas;
+    min-width: 47%;
     line-height:20px;
-    font-size:16px;
+    font-size:19px;
     resize: none;
     overflow: hidden;
     &:focus {
@@ -45,19 +47,19 @@ const SharePostInput = styled.textarea`
     }
 `
 
-const SharePostOptions = styled.div`
+const SharePostRight = styled.div`
     display: flex;
-    margin-left: 40%;
 `
 
 const SharePostOption = styled.div`
     display: flex;
     align-items: center;
+    
     margin-right: 15px;
     cursor: pointer;
     .fileUploadOutlinedIcon {
-        margin-left: 200px;
-        font-size: 40px;
+        width: 40px;
+        height: 40px;
         color: #2E7BBC;
         transition: 0.3s;
         &:hover {
@@ -88,6 +90,14 @@ export default function Share() {
 
     const textRef = useRef(null);
 
+    const useDynamicHeightField = (element, value) => {
+        useEffect(() => {
+            if (!element) return;
+    
+            element.current.style.height = 'auto';
+            element.current.style.height = element.current.scrollHeight + 'px';
+        }, [element, value]);
+    };
 
     useDynamicHeightField(textRef, shareValue);
 
@@ -108,19 +118,20 @@ export default function Share() {
     return (
         <SharePost>
             <SharePostWrapper>
-                <SharePostTop>
+                <SharePostLeft>
                     <SharePostProfilePicture src="/assets/person/10881736_818767454849281_615933931154256178_n.jpg" alt="" />
                     <FontAwesomeIcon icon="chevron-right" />
                     <SharePostInput
                         ref={textRef}
                         onChange={onChange}
+                        rows={1}
                     />
-                    <SharePostOptions>
-                        <SharePostOption>
-                            <FileUploadOutlinedIcon className="fileUploadOutlinedIcon" />
-                        </SharePostOption>
-                    </SharePostOptions>
-                </SharePostTop>
+                </SharePostLeft>
+                <SharePostRight>
+                    <SharePostOption>
+                        <FileUploadOutlinedIcon className="fileUploadOutlinedIcon" />
+                    </SharePostOption>
+                </SharePostRight>
                 {/*<SharePostButton>Share</SharePostButton>*/}
             </SharePostWrapper>
         </SharePost>

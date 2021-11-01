@@ -48,7 +48,7 @@ const TopbarCenter = styled.div`
 `
 
 const Searchbar = styled.div`
-    width: 50%;
+    min-width: 80%;
     height: 30px;
     background-color: #FAFAFA;
     border-radius: 30px;
@@ -63,7 +63,7 @@ const Searchbar = styled.div`
 const SearchInput = styled.input`
 background-color: #FAFAFA;
     border: none;
-    width: 30%;
+    width: 80%;
     &:focus {
         outline: none;
     }

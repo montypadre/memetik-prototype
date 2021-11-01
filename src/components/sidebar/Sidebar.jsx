@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import ChatIcon from '@mui/icons-material/Chat';
+import { useState, useCallback } from 'react';
+import Gallery from 'react-photo-gallery';
+import Carousel, { Modal, ModalGateway } from 'react-images';
+import { photos } from './photos';
 
 // TODO: fix scrollbar-thumb
 // TODO: get gallery images to pop out over border of sidebar, or pad the sidebar enough to give them room
@@ -70,26 +74,38 @@ const SideBarButton = styled.button`
 `
 
 export default function Sidebar() {
+    const [currentImage, setCurrentImage] = useState(0);
+    const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+    const openLightbox = useCallback((event, { image, index }) => {
+        setCurrentImage(index);
+        setViewerIsOpen(true);
+    }, []);
+
+    const closeLightbox = () => {
+        setCurrentImage(0);
+        setViewerIsOpen(false);
+    };
+
     return (
         <SideBar>
             <SideBarWrapper>
-                <SideBarMarketplace>
-                    <SideBarMarketplaceItem src="/assets/gallery/MarkArt.jpg" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/menu-main_bg.png" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/100px-Jain_Prateek_Chihna.svg.png" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/72645970_571936553567196_3640276544783384576_n.jpg" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/94879104_1071999899866330_5775335488051216384_n.jpg" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/120060462_178710167226763_4474176874152108456_o.jpg" alt="" />
-                    <SideBarMarketplaceItem src="/assets/gallery/44542_101621806563853_2913840_n.jpg" alt="" />
-                    <SideBarMarketplaceItem src="/assets/post/holofractalgraphic occurence.jpg" alt="" />
-                </SideBarMarketplace>
+                <Gallery photos={photos} onClick={openLightbox} />
+                <ModalGateway>
+                    {viewerIsOpen ? (
+                        <Modal onClose={closeLightbox}>
+                            <Carousel
+                                currentIndex={currentImage}
+                                views={photos.map(x => ({
+                                    ...x,
+                                    srcset: x.srcSet,
+                                    caption: x.title
+                                }))}
+                            />
+                        </Modal>
+                    ) : null}
+                </ModalGateway>
                 <SideBarList>
-                    {/*<SideBarListItem>
-                        <StoreIcon className="storeIcon" />
-                        <SideBarListItemText>
-                            Marketplace
-                        </SideBarListItemText>
-                    </SideBarListItem>*/}
                     <SideBarListItem>
                         <ChatIcon className="chatIcon" />
                         <SideBarListItemText>
