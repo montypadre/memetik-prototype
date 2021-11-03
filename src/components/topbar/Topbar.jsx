@@ -5,7 +5,15 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 const TopbarContainer = styled.div`
    height: 50px;
    width: 100%;
-   background-color: #FFF;
+   background: hsla(355, 85%, 63%, 1);
+
+   background: linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
+   
+   background: -moz-linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
+   
+   background: -webkit-linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
+   
+   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F1515E", endColorstr="#1DBDE6", GradientType=1 );
    display: flex;
    align-items: center;
    position: sticky;
@@ -57,13 +65,14 @@ const Searchbar = styled.div`
     .searchIcon {
         font-size: 20px !important;
         margin-left: 10px;
+        cursor: pointer;
     }
 `
 
 const SearchInput = styled.input`
-background-color: #FAFAFA;
+    background-color: #FAFAFA;
     border: none;
-    width: 80%;
+    width: 70%;
     &:focus {
         outline: none;
     }

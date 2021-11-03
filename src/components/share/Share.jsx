@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
-{/*import useDynamicHeightField from '../useDynamicHeightField';*/}
 
 const SharePost = styled.div`
     width: 100%;
@@ -85,7 +83,6 @@ const SharePostButton = styled.button`
 `
 
 export default function Share() {
-    {/*const [isExpanded, setIsExpanded] = useState(false);*/ }
     const [shareValue, setShareValue] = useState("");
 
     const textRef = useRef(null);
@@ -93,7 +90,7 @@ export default function Share() {
     const useDynamicHeightField = (element, value) => {
         useEffect(() => {
             if (!element) return;
-    
+
             element.current.style.height = 'auto';
             element.current.style.height = element.current.scrollHeight + 'px';
         }, [element, value]);
@@ -104,16 +101,6 @@ export default function Share() {
     const onChange = (e) => {
         setShareValue(e.target.value);
     }
-
-    {/*const onClose = () => {
-        setShareValue("");
-        setIsExpanded(false);
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log('send')
-    }*/}
 
     return (
         <SharePost>
