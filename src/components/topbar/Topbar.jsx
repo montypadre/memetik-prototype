@@ -6,18 +6,15 @@ const TopbarContainer = styled.div`
    height: 50px;
    width: 100%;
    background: hsla(355, 85%, 63%, 1);
-
    background: linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
-   
    background: -moz-linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
-   
    background: -webkit-linear-gradient(315deg, hsla(355, 85%, 63%, 1) 0%, hsla(192, 80%, 51%, 0.8) 100%);
-   
    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F1515E", endColorstr="#1DBDE6", GradientType=1 );
    display: flex;
    align-items: center;
    position: sticky;
    top: 0;
+   z-index: 999;
    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 `

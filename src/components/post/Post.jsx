@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ShareIcon from '@mui/icons-material/Share';
+import { Users } from "../../dummyData";
 
 const PostItem = styled.div`
     width: 100%;
@@ -119,18 +121,27 @@ const PostItemShareText = styled.span`
     font-size: 15px;
 `
 
-export default function Post() {
+export default function Post({ post }) {
+    const [tip, setTip] = useState(post.tip)
+    const [usd, setUsd] = useState(post.usd)
+    const [isTipped, setIsTipped] = useState(false)
+
+    const tipHandler = () => {
+        setTip(isTipped ? '' : tip + 1)
+        setUsd(isTipped ? '' : usd + .05)
+    }
+
     return (
         <PostItem>
             <PostItemWrapper>
                 <PostItemTop>
                     <PostItemTopLeft>
-                        <PostItemProfileImg src="/assets/person/10881736_818767454849281_615933931154256178_n.jpg" alt=""/>
+                        <PostItemProfileImg src={Users.filter(u => u.id === post.userId)[0].profilePicture} alt="" />
                         <PostItemUsername>
-                            Laura Anne
+                            {Users.filter(u => u.id === post.userId)[0].username}
                         </PostItemUsername>
                         <PostItemDate>
-                            5 min
+                            {post.date}
                         </PostItemDate>
                     </PostItemTopLeft>
                     <PostItemTopRight>
@@ -139,27 +150,27 @@ export default function Post() {
                 </PostItemTop>
                 <PostItemCenter>
                     <PostItemText>
-                        Hey! It's my first post:)
+                        {post?.desc}
                     </PostItemText>
-                    <PostItemImg src="/assets/post/holofractalgraphic occurence.jpg" alt="" />
+                    <PostItemImg src={post.img} alt="" />
                 </PostItemCenter>
                 <PostItemBottom>
                     <PostItemBottomLeft>
-                    <FontAwesomeIcon icon="cube" className="fontAwesomeIcon" />
+                        <FontAwesomeIcon icon="cube" className="fontAwesomeIcon" onClick={tipHandler} />
                         <PostItemTipCounter>
-                            32 ($1.75)
+                            {tip} (${usd})
                         </PostItemTipCounter>
                     </PostItemBottomLeft>
                     <PostItemBottomCenter>
                         <CampaignIcon className="campaignIcon" />
                         <PostItemCommentText>
-                            9 
+                            {post.comment}
                         </PostItemCommentText>
                     </PostItemBottomCenter>
                     <PostItemBottomRight>
                         <ShareIcon className="shareIcon" />
                         <PostItemShareText>
-                            17 
+                            {post.share}
                         </PostItemShareText>
                     </PostItemBottomRight>
                 </PostItemBottom>

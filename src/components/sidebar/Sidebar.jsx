@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-import ChatIcon from '@mui/icons-material/Chat';
 import { useState, useCallback } from 'react';
-import { images } from './images';
 import ResponsiveGallery from 'react-responsive-gallery';
-
-// TODO: fix scrollbar-thumb
+import { Images } from "../../dummyData";
 
 const SideBar = styled.div`
-   flex: 4;
+   flex: 3.5;
    height: calc(100vh - 50px);
    background-color: #FAFAFA;
    overflow-y: scroll;
+   position: sticky;
+   top: 50px;
    &::-webkit-scrollbar {
        width: 5px;
       
@@ -57,8 +56,8 @@ export default function Sidebar() {
     return (
         <SideBar>
             <SideBarWrapper>
-                <ResponsiveGallery 
-                    images={images} 
+                <ResponsiveGallery
+                    images={Images}
                     useLightBox={true}
                     numOfImagesPerRow={{
                         xs: 1,
@@ -75,13 +74,11 @@ export default function Sidebar() {
                         l: 50,
                         xl: 75,
                         xxl: 100
-                      }}
+                    }}
                 />
                 <SideBarList>
                     <SideBarListItem>
-                        <ChatIcon className="chatIcon" />
                         <SideBarListItemText>
-                            Chat
                         </SideBarListItemText>
                     </SideBarListItem>
                 </SideBarList>

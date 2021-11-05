@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Share from "../share/Share";
 import Post from "../post/Post";
+import {Posts} from "../../dummyData";
 
 const NewsFeed = styled.div`
    flex: 8;
@@ -16,8 +17,9 @@ export default function Feed() {
         <NewsFeed>
             <NewsFeedWrapper>
                 <Share />
-                <Post />
-                <Post />
+                {Posts.map(p => (
+                    <Post key={p.id} post={p} />
+                ))}
             </NewsFeedWrapper>
         </NewsFeed>
     )
